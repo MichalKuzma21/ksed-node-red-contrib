@@ -1,0 +1,43 @@
+<script type="text/javascript">
+  RED.nodes.registerType('send-invoice', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: 'false', required: true },
+      invoice_status_polling_max_retries: { value: '5', required: true },
+      invoice_status_polling_initial_interval: { value: '1000', required: true },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['UPO XML', 'Error message'],
+    icon: 'file.png',
+    label: 'Send Invoice in Interactive session',
+  });
+</script>
+
+<script type="text/html" data-template-name="send-invoice">
+  <div class="form-row">
+    <label for="node-input-base_url">Base URL</label>
+    <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-debug">Debug</label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-invoice_status_polling_max_retries"
+      >Invoice Status Polling Max Retries</label
+    >
+    <input type="number" id="node-input-invoice_status_polling_max_retries" value="5" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-invoice_status_polling_initial_interval"
+      >Invoice Status Polling Initial Interval (ms)</label
+    >
+    <input type="number" id="node-input-invoice_status_polling_initial_interval" value="1000" />
+  </div>
+</script>

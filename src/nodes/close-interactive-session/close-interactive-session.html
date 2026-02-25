@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  RED.nodes.registerType('close-interactive-session', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: 'false', required: true },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['Reference Number', 'Error'],
+    icon: 'file.png',
+    label: 'Close interactive session',
+  });
+</script>
+
+<script type="text/html" data-template-name="close-interactive-session">
+  <div class="form-row">
+    <label for="node-input-base_url">Base URL</label>
+    <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-debug">Debug</label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+</script>

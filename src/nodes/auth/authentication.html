@@ -1,0 +1,101 @@
+<script type="text/javascript">
+  RED.nodes.registerType('authentication', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: 'false', required: true },
+      verify_certificate_chain: { value: 'true', required: true },
+      subject_identifier_type: { value: 'certificateSubject', required: true },
+      context_identifier_type: { value: 'Nip', required: true },
+      context_identifier_value: { required: true },
+      auth_status_polling_max_retries: { value: '5', required: true },
+      auth_status_polling_initial_interval: { value: '1000', required: true },
+      key_file_path: { required: true },
+      cert_file_path: { required: true },
+      algo_type: { value: 'ECDSA', required: true },
+    },
+    credentials: {
+      key_passphrase: { type: 'password' },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['Tokens', 'Error'],
+    icon: 'file.png',
+    label: 'Authenticate with KSEF Certificate',
+  });
+</script>
+
+<script type="text/html" data-template-name="authentication">
+  <div class="form-row">
+      <label for="node-input-base_url">Base URL</label>
+      <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-debug">Debug</label>
+      <input type="checkbox" id="node-input-debug">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-verify_certificate_chain">Verify Certificate Chain</label>
+      <input type="checkbox" id="node-input-verify_certificate_chain" checked>
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-subject_identifier_type">Subject Identifier Type</label>
+      <select id="node-input-subject_identifier_type">
+          <option value="certificateSubject">certificateSubject</option>
+          <option value="certificateFingerprint">certificateFingerprint</option>
+      </select>
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-context_identifier_type">Context Identifier Type</label>
+      <select id="node-input-context_identifier_type">
+          <option value="Nip">Nip</option>
+          <option value="InternalId">InternalId</option>
+          <option value="NipVatUe">NipVatUe</option>
+      </select>
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-context_identifier_value">Context Identifier Value</label>
+      <input type="text" id="node-input-context_identifier_value" placeholder="Enter NIP or InternalId">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-auth_status_polling_max_retries">Auth Polling Max Retries</label>
+      <input type="number" id="node-input-auth_status_polling_max_retries" value="5">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-auth_status_polling_initial_interval">Auth Polling Initial Interval (ms)</label>
+      <input type="number" id="node-input-auth_status_polling_initial_interval" value="1000">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-key_file_path">Private Key Filepath</label>
+      <input type="text" id="node-input-key_file_path" placeholder="/path/to/private.key">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-cert_file_path">Certificate Filepath</label>
+      <input type="text" id="node-input-cert_file_path" placeholder="/path/to/certificate.crt">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-key_passphrase"><i class="fa fa-lock"></i> Key Passphrase</label>
+      <input type="password" id="node-input-key_passphrase" placeholder="Enter passphrase (if encrypted key)">
+  </div>
+
+  <div class="form-row">
+      <label for="node-input-algo_type">Algorithm Type</label>
+      <select id="node-input-algo_type">
+          <option value="RSA">RSA</option>
+          <option value="ECDSA">ECDSA</option>
+      </select>
+  </div>
+
+  </div>
+</script>

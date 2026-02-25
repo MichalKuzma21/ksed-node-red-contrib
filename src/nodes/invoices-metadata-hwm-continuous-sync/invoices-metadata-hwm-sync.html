@@ -1,0 +1,155 @@
+<script type="text/javascript">
+  RED.nodes.registerType('invoices-metadata-hwm-sync', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: false, required: true },
+      sync_interval_minutes: { value: 15, required: true },
+      subject_type: { value: 'Subject1', required: true },
+      date_type: { value: 'PermanentStorage', required: true },
+      restrict_to_hwm: { value: null, required: false },
+      ksef_number: { value: null, required: false },
+      invoice_number: { value: null, required: false },
+      amount_type: { value: null, required: false },
+      amount_from: { value: null, required: false },
+      amount_to: { value: null, required: false },
+      seller_nip: { value: null, required: false },
+      buyer_identifier_type: { value: null, required: false },
+      buyer_identifier_value: { value: null, required: false },
+      currency_codes: { value: null, required: false },
+      invoicing_mode: { value: null, required: false },
+      is_self_invoicing: { value: null, required: false },
+      form_type: { value: null, required: false },
+      invoice_types: { value: null, required: false },
+      has_attachment: { value: null, required: false },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['Success', 'Error'],
+    icon: 'file.png',
+    label: function () {
+      return 'Invoices Metadata HWM Sync';
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="invoices-metadata-hwm-sync">
+  <div class="form-row">
+    <label for="node-input-base_url">Base URL</label>
+    <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-debug">Debug</label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-sync_interval_minutes">Sync Interval (minutes)</label>
+    <input type="number" id="node-input-sync_interval_minutes" value="15" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-subject_type">Subject Type</label>
+    <select id="node-input-subject_type">
+      <option value="Subject1">Subject1</option>
+      <option value="Subject2">Subject2</option>
+      <option value="Subject3">Subject3</option>
+      <option value="SubjectAuthorized">SubjectAuthorized</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-date_type">Date Type</label>
+    <select id="node-input-date_type">
+      <option value="Issue">Issue</option>
+      <option value="Invoicing">Invoicing</option>
+      <option value="PermanentStorage">Permanent Storage</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-restrict_to_hwm">Restrict To PermanentStorageHwmDate</label>
+    <input type="checkbox" id="node-input-restrict_to_hwm" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-ksef_number">KSeF Number</label>
+    <input type="text" id="node-input-ksef_number" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-invoice_number">Invoice Number</label>
+    <input type="text" id="node-input-invoice_number" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-amount_type">Amount Type</label>
+    <select id="node-input-amount_type">
+      <option value="Brutto">Brutto</option>
+      <option value="Netto">Netto</option>
+      <option value="Vat">Vat</option>
+      <option value="">None</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-seller_nip">Seller NIP</label>
+    <input type="text" id="node-input-seller_nip" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-buyer_identifier_type">Buyer Identifier Type</label>
+    <select id="node-input-buyer_identifier_type">
+      <option value="Nip">Nip</option>
+      <option value="VatUe">VatUe</option>
+      <option value="Other">Other</option>
+      <option value="">None</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-buyer_identifier_value">Buyer Identifier Value</label>
+    <input type="text" id="node-input-buyer_identifier_value" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-currency_codes">Currency Codes (comma-separated)</label>
+    <input type="text" id="node-input-currency_codes" placeholder="PLN, EUR, USD" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-invoicing_mode">Invoicing Mode</label>
+    <select id="node-input-invoicing_mode">
+      <option value="">Any</option>
+      <option value="Online">Online</option>
+      <option value="Offline">Offline</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-is_self_invoicing">Is Self Invoicing</label>
+    <input type="checkbox" id="node-input-is_self_invoicing" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-form_type">Form Type</label>
+    <select id="node-input-form_type">
+      <option value="">Any</option>
+      <option value="FA">FA</option>
+      <option value="PEF">PEF</option>
+      <option value="RR">RR</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-invoice_types">Invoice Types (comma-separated)</label>
+    <input type="text" id="node-input-invoice_types" placeholder="Vat,Zal,Kor" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-has_attachment">Has Attachment</label>
+    <input type="checkbox" id="node-input-has_attachment" />
+  </div>
+</script>

@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  RED.nodes.registerType('init-interactive-session', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: 'false', required: true },
+      form_code_system_code: { value: 'FA (3)', required: true },
+      form_code_schema_version: { value: '1-0E', required: true },
+      form_code_value: { value: 'FA', required: true },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['Reference Number', 'Error'],
+    icon: 'file.png',
+    label: 'Init interactive session',
+  });
+</script>
+
+<script type="text/html" data-template-name="init-interactive-session">
+  <div class="form-row">
+    <label for="node-input-base_url">Base URL</label>
+    <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-debug">Debug</label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-form_code_system_code">Form Code - System Code</label>
+    <input type="text" id="node-input-base_url" placeholder="FA (3)" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-form_code_schema_version">Form Code - Schema Version</label>
+    <input type="text" id="node-input-base_url" placeholder="1-0E" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-form_code_value">Form Code - Value</label>
+    <input type="text" id="node-input-form_code_value" placeholder="FA" />
+  </div>
+</script>

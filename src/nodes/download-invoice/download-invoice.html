@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  RED.nodes.registerType('download-invoice', {
+    category: 'KSeF',
+    color: '#a6bbcf',
+    defaults: {
+      base_url: { value: 'https://api.ksef.mf.gov.pl', required: true },
+      debug: { value: 'false', required: true },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['XML', 'Error'],
+    icon: 'file.png',
+    label: 'Download Invoice XML by Ksef Number',
+  });
+</script>
+
+<script type="text/html" data-template-name="download-invoice">
+  <div class="form-row">
+    <label for="node-input-base_url">Base URL</label>
+    <input type="text" id="node-input-base_url" placeholder="https://api.ksef.mf.gov.pl" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-debug">Debug</label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+</script>
