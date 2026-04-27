@@ -46,7 +46,7 @@ module.exports = function (RED: NodeAPI) {
           const algo: RsaHashedImportParams | EcKeyImportParams =
             algoType === 'ECDSA'
               ? { name: 'ECDSA', namedCurve: 'P-256' }
-              : { name: 'RSA-PSS', hash: 'SHA-256' };
+              : { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' };
           const apiClientLayer = ApiClientLive.pipe(
             Layer.provide(Layer.succeed(ApiConfig, { baseUrl })),
           );
